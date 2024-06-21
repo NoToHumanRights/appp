@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <style>
+     .footer {
+      color: white;
+      background: black;
+      text-align: center;
+      vertical-align: bottom;
+     }
+    </style>
+</head>
+<body>
+    <form id="quizForm">
+        <label for="username">Discord Username (e.g: @notter4):</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="skibidi">What is a skibidi toilet?</label>
+        <input type="text" id="skibidi" name="skibidi" required><br><br>
+
+        <label for="sigma">What is a sigma male?</label>
+        <input type="text" id="sigma" name="sigma" required><br><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    <div class="footer">
+    <p>13th atempt god damn it shaun give me admin already</p>
+    </div>
+    <script>
+        async function submitForm() {
+            const form = document.getElementById('quizForm');
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            const response = await fetch('submit.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>
